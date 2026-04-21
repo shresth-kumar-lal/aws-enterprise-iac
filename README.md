@@ -6,11 +6,6 @@ It demonstrates Zero-Trust networking principles, multi-AZ fault tolerance, and 
 
 ## Architecture & Security
 
-* **State Locking (The Backend):** Configured to use a remote S3 bucket for state storage and a DynamoDB table for strict state-locking, preventing concurrent pipeline mutations.
-* **The VPC (Network Isolation):** A custom Virtual Private Cloud spanning two Availability Zones in Mumbai (`ap-south-1a`, `ap-south-1b`).
-* **The Public Tier (Ingress):** Houses the Application Load Balancer (ALB), an Internet Gateway, and NAT Gateways.
-* **The Private Tier (Zero Trust):** Houses an Auto Scaling Group (ASG) of web servers. **Security Posture:** The web servers reside in private subnets with no public IP addresses. Their Security Group explicitly denies all inbound traffic except from the ALB. Outbound traffic is securely routed through a NAT gateway for system updates.
-
 ```mermaid
 flowchart TB
     User((Internet User))
@@ -68,6 +63,11 @@ flowchart TB
     style Priv1 fill:#ffe6e6,stroke:#d62728,stroke-dasharray: 5 5,color:#000
     style Priv2 fill:#ffe6e6,stroke:#d62728,stroke-dasharray: 5 5,color:#000
 ```
+
+* **State Locking (The Backend):** Configured to use a remote S3 bucket for state storage and a DynamoDB table for strict state-locking, preventing concurrent pipeline mutations.
+* **The VPC (Network Isolation):** A custom Virtual Private Cloud spanning two Availability Zones in Mumbai (`ap-south-1a`, `ap-south-1b`).
+* **The Public Tier (Ingress):** Houses the Application Load Balancer (ALB), an Internet Gateway, and NAT Gateways.
+* **The Private Tier (Zero Trust):** Houses an Auto Scaling Group (ASG) of web servers. **Security Posture:** The web servers reside in private subnets with no public IP addresses. Their Security Group explicitly denies all inbound traffic except from the ALB. Outbound traffic is securely routed through a NAT gateway for system updates.
 
 ## Repository Structure
 
